@@ -1,0 +1,5 @@
+{
+  "appId": "com.example.currencyconverter",
+  "appName": "Currency Converter",
+  "webDir": "dist"
+}

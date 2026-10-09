@@ -1,0 +1,20 @@
+{
+  "admob": {
+    "testMode": true,
+    "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+    "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+    "androidBanner": "ca-app-pub-3940256099942544/6300978716",
+    "iosBanner": "ca-app-pub-3940256099942544/2934735716"
+  },
+  "revenuecat": {
+    "androidKey": "",
+    "iosKey": "",
+    "entitlement": "premium"
+  },
+  "share": {
+    "url": "https://example.com",
+    "text": "Check out this currency converter: live rates for 160+ currencies.",
+    "bonusHours": 24,
+    "maxBonusDays": 7
+  }
+}

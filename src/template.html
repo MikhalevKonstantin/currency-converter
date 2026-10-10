@@ -88,7 +88,8 @@ footer a{color:var(--muted)}
   <div class="card" id="share-card">
     <b>Share with friends</b>
     <div class="sub" id="share-sub"></div>
-    <div class="btns"><button id="share">Share app</button></div>
+    <div class="btns"><button id="share">Share app</button><button id="copylink" class="ghost">Copy link</button></div>
+    <div class="sub" id="share-link" style="word-break:break-all"></div>
   </div>
 
   <!-- Native apps only: one-time purchase to remove ads -->
@@ -310,7 +311,14 @@ async function setupMonetization(){
   $('share-sub').textContent = native
     ? `Share the app and get ${bonusH} hours without ads (once a day, up to ${CFG.share.maxBonusDays} days saved).`
     : 'Know someone who needs exchange rates? Send them the link.';
+  const link = shareUrl();
+  $('share-link').innerHTML = `<a href="${link}" target="_blank" rel="noopener">${link}</a>`;
   $('share').onclick = shareApp;
+  $('copylink').onclick = async () => {
+    try { await navigator.clipboard.writeText(link); $('copylink').textContent = 'Copied!'; }
+    catch { prompt('Copy this link:', link); }
+    setTimeout(() => $('copylink').textContent = 'Copy link', 2000);
+  };
 
   if (native) {
     $('buy').onclick = buy;
@@ -365,8 +373,12 @@ async function restore(){
   } catch { alert('Could not restore purchases.'); }
 }
 
+// Native apps share the site link; web pages share the page you are on (e.g. a specific pair).
+function shareUrl(){ return native ? CFG.share.url : location.origin + location.pathname; }
+
 async function shareApp(){
-  const { url, text } = CFG.share;
+  const { text } = CFG.share;
+  const url = shareUrl();
   let shared = false;
   try {
     if (native && Share) { await Share.share({ title: 'Currency Converter', text, url, dialogTitle: 'Share with friends' }); shared = true; }

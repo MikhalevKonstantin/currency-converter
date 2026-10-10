@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOK to PHP – Convert Norwegian Krone to Philippine Peso | Live Rate</title>
+<meta name="description" content="Convert NOK to PHP with the live exchange rate. Free Norwegian Krone to Philippine Peso converter with a quick amount table.">
+<link rel="canonical" href="https://mikhalevkonstantin.github.io/currency-converter/convert/nok-to-php/">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="../../icon.svg" type="image/svg+xml">
+<link rel="manifest" href="../../manifest.webmanifest">
+<style>
+:root{--bg:#f3f5fb;--card:#fff;--text:#0f1b3d;--muted:#667085;--accent:#2f5bea;--accent2:#6d4aff;--border:#e6e9f2;--soft:#f3f5fb;--shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06);--gold:#f5a524}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#151c33;--text:#eef1fb;--muted:#9aa4c0;--accent:#6c8cff;--accent2:#8f74ff;--border:#252e4d;--soft:#1b2342;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:ui-rounded,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);font-variant-numeric:tabular-nums}
+main{max-width:1120px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom))}
+.layout{display:flex;flex-direction:column;gap:0}
+.col{display:contents}
+.o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}.o6{order:6}.o7{order:7}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.quick button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:.82rem;padding:6px 12px;border-radius:999px}
+.quick button.on{background:#fff;color:var(--accent)}
+nav.top{margin-left:auto;font-size:.85rem;display:none}
+@media(min-width:600px){nav.top{display:block}}
+nav.top a{color:var(--muted);text-decoration:none;margin-left:14px}
+nav.top a:hover{color:var(--accent)}
+@media(min-width:900px){
+  main{padding-top:28px}
+  .layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start}
+  .col{display:block}
+  .col>*{order:0}
+  header.top{margin:0 0 24px}
+  h1{font-size:1.6rem}
+  .logo{width:50px;height:50px;border-radius:15px}
+  .tag{font-size:.9rem}
+  .card{padding:24px;margin-bottom:22px}
+  .hero{padding:32px}
+  .hero .money{grid-template-columns:minmax(0,1fr) 150px}
+  .hero .money input{font-size:2.6rem;padding:16px 20px}
+  .hero select{font-size:1.1rem;padding:15px 36px 15px 16px}
+  #swap{width:52px;height:52px}
+  .chip{font-size:.82rem}
+  .fav{padding:12px 0}
+  .fav .flag{font-size:1.9rem}
+}
+@media(min-width:1200px){.hero{padding:38px}}
+header.top{display:flex;align-items:center;gap:10px;margin:8px 4px 16px}
+.logo{width:40px;height:40px;border-radius:12px;box-shadow:0 6px 16px rgba(47,91,234,.35);flex:none}
+h1{font-size:1.2rem;margin:0;letter-spacing:-.01em}
+.tag{font-size:.75rem;color:var(--muted);margin-top:1px}
+h2{font-size:1.05rem;margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card>b:first-child,.title{font-size:1rem}
+.hero{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;border:0;padding:20px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero label{color:rgba(255,255,255,.75);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.68rem}
+label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;padding:12px;font:inherit;font-size:1rem;border:1px solid var(--border);border-radius:12px;background:var(--soft);color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,91,234,.2)}
+.pair{display:flex;flex-direction:column;gap:6px}
+.side label{margin-bottom:8px}
+.hint{text-transform:none;letter-spacing:0;font-weight:400;opacity:.8}
+.money{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:8px}
+.hero .money input{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:1.9rem;font-weight:800;padding:12px 14px;border-radius:16px;letter-spacing:-.01em;min-width:0}
+.hero .money input:focus{box-shadow:0 0 0 3px rgba(255,255,255,.3);border-color:#fff}
+.hero .money select{height:100%;border-radius:16px}
+#result{background:rgba(255,255,255,.26)!important}
+.pair #swap{align-self:center;margin:2px 0}
+.hero select{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;font-weight:600;appearance:none;-webkit-appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='white' stroke-width='2' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.hero select option{color:#0f1b3d}
+.row{display:grid;grid-template-columns:1fr 44px 1fr;gap:8px;align-items:end;margin-top:14px}
+button{border:0;background:var(--accent);color:#fff;border-radius:12px;padding:11px 16px;font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:transform .1s,opacity .15s,background .15s}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.5;cursor:default}
+#swap{width:44px;height:44px;padding:0;border-radius:50%;background:#fff;color:var(--accent);font-size:1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:transform .3s}
+#swap.spin{transform:rotate(180deg)}
+.hero .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:.74rem;background:rgba(255,255,255,.18);border-radius:999px;padding:4px 10px;color:#fff}
+.sub{color:var(--muted);font-size:.82rem;margin-top:4px;line-height:1.4}
+.hero #favto{margin-top:14px;background:rgba(255,255,255,.18);color:#fff;font-size:.82rem;padding:8px 12px;border-radius:999px}
+.hero #favto:disabled{opacity:.55}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td{padding:9px 0;border-bottom:1px solid var(--border)}
+td:last-child{text-align:right;font-weight:600}
+tr:last-child td{border-bottom:0}
+.ad{min-height:90px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;border:1px dashed var(--border);border-radius:16px;margin-bottom:14px}
+.promo{display:block;text-decoration:none;color:inherit;font-size:.92rem;line-height:1.45}
+.promo b{color:var(--accent);font-size:1rem}
+.promo-cta{margin-top:8px;font-weight:700;color:var(--accent)}
+#promo-card{background:linear-gradient(135deg,rgba(47,91,234,.08),rgba(109,74,255,.08))}
+.cardhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.cardhead span{font-size:.75rem;color:var(--muted)}
+.fav{display:grid;grid-template-columns:34px 1fr 36% 28px 28px;gap:6px;align-items:center;padding:8px 0;border-top:1px solid var(--border)}
+.fav:first-child{border-top:0}
+.fav .flag{font-size:1.6rem;line-height:1;text-align:center}
+.fav .nm b{display:block;font-size:.95rem}
+.fav .nm small{display:block;color:var(--muted);font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fav input{padding:9px 10px;font-size:1rem;text-align:right;font-weight:600}
+.fav .prim{font-size:.62rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.ico{background:transparent;color:var(--muted);padding:6px;font-size:1.05rem;min-width:30px;border-radius:10px;font-weight:400}
+.ico:hover{background:var(--soft)}
+.ico.on{color:var(--gold)}
+.add{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:12px}
+.add select{font-size:.92rem;padding:10px}
+.ghost{background:transparent;color:var(--accent);border:1px solid var(--border)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+#share-link a{color:var(--accent)}
+.links a{display:inline-block;margin:3px 2px;padding:5px 11px;border:1px solid var(--border);border-radius:999px;background:var(--soft);color:var(--accent);text-decoration:none;font-size:.8rem;font-weight:600}
+.links a:hover{border-color:var(--accent)}
+.consent{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));max-width:560px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;box-shadow:0 10px 36px rgba(0,0,0,.28);font-size:.85rem;z-index:10}
+.consent a{color:var(--accent)}
+.consent .btns{margin-top:10px}
+.consent button{font-size:.88rem;padding:9px 16px}
+.native-only{display:none}
+.native .web-only{display:none}
+.native .native-only{display:block}
+.native #ad-slot{display:none}
+.noads #ad-slot,.noads #promo-card{display:none}
+.hasbanner main{padding-bottom:90px}
+footer{color:var(--muted);font-size:.74rem;text-align:center;margin-top:8px;line-height:1.5}
+footer a{color:var(--muted)}
+footer p{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <img class="logo" src="../../icon.svg" alt="" width="48" height="48">
+    <div><h1>NOK to PHP Converter</h1><div class="tag">Daily exchange rates · 160+ currencies</div></div>
+    <nav class="top web-only"><a href="../../">Home</a><a href="../../privacy.html">Privacy</a></nav>
+  </header>
+
+  <div class="layout">
+   <div class="col">
+    <div class="card hero o1">
+      <div class="pair">
+        <div class="side">
+          <label for="amount">You have</label>
+          <div class="money">
+            <input id="amount" type="number" inputmode="decimal" value="100" min="0" step="any" aria-label="Amount to convert">
+            <select id="from" aria-label="From currency"></select>
+          </div>
+          <div class="quick" id="quick"></div>
+        </div>
+        <button id="swap" aria-label="Swap currencies">⇅</button>
+        <div class="side">
+          <label for="result">You get <span class="hint">· edit to convert backwards</span></label>
+          <div class="money">
+            <input id="result" type="number" inputmode="decimal" min="0" step="any" aria-label="Converted amount">
+            <select id="to" aria-label="To currency"></select>
+          </div>
+        </div>
+      </div>
+      <div class="meta"><span class="chip" id="rate"></span><span class="chip" id="updated"></span></div>
+      <button id="favto" title="Add target currency to My currencies">☆ Add <span id="favtoc"></span> to My currencies</button>
+    </div>
+
+    <div class="web-only o7"><div class="card"><h2 id="seo-h">Convert Norwegian Krone to Philippine Peso</h2><p id="seo-p">The NOK to PHP exchange rate is about <b>6.5756</b> (1 NOK = 6.5756 PHP). Use the converter above for the live rate.</p><table id="seo-table"><tr><td>NOK 1.00</td><td>₱6.58</td></tr><tr><td>NOK 5.00</td><td>₱32.88</td></tr><tr><td>NOK 10.00</td><td>₱65.76</td></tr><tr><td>NOK 50.00</td><td>₱328.78</td></tr><tr><td>NOK 100.00</td><td>₱657.56</td></tr><tr><td>NOK 500.00</td><td>₱3,287.78</td></tr><tr><td>NOK 1,000.00</td><td>₱6,575.56</td></tr></table><p class="sub links">More: <a href="../nok-to-usd/">NOK to USD</a><a href="../nok-to-eur/">NOK to EUR</a><a href="../nok-to-gbp/">NOK to GBP</a><a href="../nok-to-jpy/">NOK to JPY</a><a href="../nok-to-cad/">NOK to CAD</a><a href="../nok-to-aud/">NOK to AUD</a></p></div></div>
+   </div>
+
+   <div class="col">
+    <div class="card o2">
+      <div class="cardhead"><b class="title">My currencies</b><span>Type in any row · ★ primary</span></div>
+      <div id="favs"></div>
+      <div class="add"><select id="addsel"></select><button id="addbtn">Add</button></div>
+    </div>
+
+    <!-- MONETIZATION 1: affiliate offer. Replace href with your own referral link (Wise, Revolut, Remitly, etc.) -->
+    <div class="card o3" id="promo-card">
+      <a class="promo" id="promo" href="https://wise.com/" target="_blank" rel="sponsored noopener">
+        <b id="promo-title">Sending money abroad?</b><br>
+        <span id="promo-text">Banks often add a hidden markup to the exchange rate. Compare the real rate with a low-fee transfer service.</span>
+        <div class="promo-cta" id="promo-cta">Compare transfer rates →</div>
+        <div class="sub">Sponsored link</div>
+      </a>
+    </div>
+
+    <div class="card o3" id="survey" hidden>
+      <b class="title">Quick question</b>
+      <div class="sub">What do you mostly use this for? (anonymous, helps us improve)</div>
+      <div class="btns" id="survey-btns">
+        <button class="ghost" data-use="travel">Travel</button>
+        <button class="ghost" data-use="shopping">Shopping</button>
+        <button class="ghost" data-use="sending-money">Sending money</button>
+        <button class="ghost" data-use="work">Work</button>
+        <button class="ghost" data-use="other">Other</button>
+      </div>
+    </div>
+
+    <div class="card o4" id="share-card">
+      <b class="title">Share with friends</b>
+      <div class="sub" id="share-sub"></div>
+      <div class="btns"><button id="share">Share app</button><button id="copylink" class="ghost">Copy link</button></div>
+      <div class="sub" id="share-link" style="word-break:break-all"></div>
+    </div>
+
+    <!-- Native apps only: one-time purchase to remove ads -->
+    <div class="card native-only o5" id="pro-card">
+      <b class="title" id="pro-title">Remove ads</b>
+      <div class="sub" id="pro-sub"></div>
+      <div class="btns">
+        <button id="buy">Remove ads</button>
+        <button id="restore" class="ghost">Restore purchases</button>
+      </div>
+    </div>
+
+    <!-- MONETIZATION 2: display ads. Paste your AdSense (or similar) snippet here once approved. -->
+    <div class="ad o6" id="ad-slot">Ad space</div>
+   </div>
+  </div>
+
+  <footer>
+    <p><a href="../../privacy.html">Privacy Policy</a></p>
+    <p>Rates by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>. For information only, not financial advice.</p>
+  </footer>
+</main>
+<div class="consent" id="consent" hidden>
+  <div>We use cookies for ads and to measure traffic. <a href="../../privacy.html">Privacy Policy</a></div>
+  <div class="btns"><button id="consent-yes">Accept</button><button class="ghost" id="consent-no">Decline</button></div>
+</div>
+
+<script>
+const API = 'https://open.er-api.com/v6/latest/USD';
+const CACHE_KEY = 'rates-v1';
+const DEFAULT_FAVS = ['USD','EUR','GBP'];
+window.PRESET = {"from":"NOK","to":"PHP"};
+window.APP_CONFIG = {"admob":{"testMode":true,"androidAppId":"ca-app-pub-3940256099942544~3347511713","iosAppId":"ca-app-pub-3940256099942544~1458002511","androidBanner":"ca-app-pub-3940256099942544/6300978716","iosBanner":"ca-app-pub-3940256099942544/2934735716"},"revenuecat":{"androidKey":"","iosKey":"","entitlement":"premium"},"share":{"url":"https://mikhalevkonstantin.github.io/currency-converter","text":"Check out this currency converter: live rates for 160+ currencies.","bonusHours":24,"maxBonusDays":7},"analytics":{"_note":"provider: none | umami | plausible | goatcounter | ga4. Fill only the field for the provider you pick. Web only; apps never load analytics.","provider":"none","umamiWebsiteId":"","umamiScript":"https://cloud.umami.is/script.js","plausibleDomain":"","plausibleScript":"https://plausible.io/js/script.tagged-events.js","goatcounterCode":"","ga4Id":""},"offers":{"defaultUrl":"https://wise.com/","urls":{},"generic":{"title":"Sending money abroad?","text":"Banks often add a hidden markup to the exchange rate. Compare the real rate with a low-fee transfer service.","cta":"Compare transfer rates →"},"corridors":{"PHP":"the Philippines","INR":"India","MXN":"Mexico","PLN":"Poland","UAH":"Ukraine","NGN":"Nigeria","KES":"Kenya","EGP":"Egypt","PKR":"Pakistan","BDT":"Bangladesh","VND":"Vietnam","THB":"Thailand","COP":"Colombia","BRL":"Brazil","CNY":"China","TRY":"Turkey","ZAR":"South Africa","RON":"Romania","IDR":"Indonesia","MYR":"Malaysia","ARS":"Argentina","CZK":"Czechia","HUF":"Hungary","ILS":"Israel","KRW":"South Korea","JPY":"Japan","AED":"the UAE","SGD":"Singapore","HKD":"Hong Kong","SEK":"Sweden","NOK":"Norway","NZD":"New Zealand","AUD":"Australia","CAD":"Canada","CHF":"Switzerland","GBP":"the UK","EUR":"Europe","USD":"the US"},"senders":["USD","EUR","GBP","CAD","AUD","AED","SGD","CHF","NZD","SEK","NOK","JPY","HKD"]}};
+const $ = id => document.getElementById(id);
+let data = null;
+
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+async function loadRates(){
+  const cached = store.get(CACHE_KEY);
+  if (cached && Date.now() - cached.fetched < 3600e3) return cached;
+  try {
+    const r = await fetch(API);
+    const j = await r.json();
+    if (j.result !== 'success') throw new Error('bad response');
+    const fresh = { rates: j.rates, updated: j.time_last_update_utc, fetched: Date.now() };
+    store.set(CACHE_KEY, fresh);
+    return fresh;
+  } catch (e) {
+    if (cached) return { ...cached, stale: true };
+    throw e;
+  }
+}
+
+function fmt(n, cur){
+  try { return new Intl.NumberFormat(undefined,{style:'currency',currency:cur,maximumFractionDigits:2}).format(n); }
+  catch { return n.toFixed(2) + ' ' + cur; }
+}
+
+function convert(amount, from, to){
+  return amount / data.rates[from] * data.rates[to];
+}
+
+let favs = [];
+let focusedFav = null;
+
+function saveFavs(){ store.set('favs', favs); }
+
+function renderFavs(from, amount){
+  const el = $('favs');
+  // keep focused input untouched while typing
+  if (focusedFav && el.contains(document.activeElement)) {
+    favs.forEach(c => { const i = el.querySelector(`input[data-c="${c}"]`); if (i && c !== focusedFav) i.value = round(convert(amount, from, c)); });
+    return;
+  }
+  el.innerHTML = favs.map((c,i) => `<div class="fav">
+      <div class="flag">${flag(c)}</div>
+      <div class="nm"><b>${c}${i===0?' <span class="prim">primary</span>':''}</b><small>${cname(c)}</small></div>
+      <input type="number" inputmode="decimal" step="any" data-c="${c}" value="${round(convert(amount, from, c))}" aria-label="${c} amount">
+      <button class="ico ${i===0?'on':''}" data-primary="${c}" title="Make primary" aria-label="Make ${c} primary">${i===0?'★':'☆'}</button>
+      <button class="ico" data-rm="${c}" title="Remove" aria-label="Remove ${c}">✕</button>
+    </div>`).join('') || '<div class="sub">No currencies yet. Add one below.</div>';
+}
+
+function flag(c){
+  if (c === 'EUR') return '🇪🇺';
+  if (/^X|^ANG$|^SHP$|^FKP$/.test(c)) return '🏳️';
+  return String.fromCodePoint(...[...c.slice(0,2)].map(ch => 127397 + ch.charCodeAt(0)));
+}
+function cname(c){ try { return new Intl.DisplayNames('en',{type:'currency'}).of(c) || c; } catch { return c; } }
+const AMOUNTS = [1, 5, 10, 50, 100, 500, 1000];
+function updateSeo(from, to){
+  const t = $('seo-table'); if (!t) return;
+  const r = convert(1, from, to);
+  $('seo-h').textContent = `Convert ${cname(from)} to ${cname(to)}`;
+  $('seo-p').innerHTML = `The ${from} to ${to} exchange rate is about <b>${r.toFixed(4)}</b> (1 ${from} = ${r.toFixed(4)} ${to}). Use the converter above for the live rate.`;
+  t.innerHTML = AMOUNTS.map(x => `<tr><td>${fmt(x, from)}</td><td>${fmt(x * r, to)}</td></tr>`).join('');
+}
+function updatePromo(from, to){
+  const o = CFG.offers, c = o.corridors[to], g = o.generic;
+  if (c && to !== from && o.senders.includes(from)) {
+    $('promo-title').textContent = `Sending ${from} to ${c}?`;
+    $('promo-text').textContent = `Banks often add a hidden markup to the ${from} to ${to} rate. Compare transfer services to see how much more arrives in ${to}.`;
+    $('promo-cta').textContent = `Compare ${from} to ${to} transfer rates →`;
+  } else {
+    $('promo-title').textContent = g.title; $('promo-text').textContent = g.text; $('promo-cta').textContent = g.cta;
+  }
+  $('promo').href = o.urls[to] || o.defaultUrl;
+}
+function round(n){ return n >= 100 ? Math.round(n*100)/100 : Math.round(n*10000)/10000; }
+
+function render(){
+  const amount = parseFloat($('amount').value) || 0;
+  const from = $('from').value, to = $('to').value;
+  if (document.activeElement !== $('result')) $('result').value = round(convert(amount, from, to));
+  $('rate').textContent = `1 ${from} = ${convert(1, from, to).toFixed(4)} ${to}`;
+  $('updated').textContent = (data.stale ? 'Offline · saved rates · ' : '') + 'Updated ' + new Date(data.updated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
+  $('favtoc').textContent = to;
+  document.querySelectorAll('#quick button').forEach(b => b.classList.toggle('on', parseFloat(b.dataset.amt) === amount));
+  $('favto').disabled = favs.includes(to);
+  renderFavs(from, amount);
+  updateSeo(from, to);
+  updatePromo(from, to);
+  trackPair(from, to);
+  if (!window.PRESET) {
+    store.set('last', { from, to, amount });
+    history.replaceState(null, '', `#${from}-${to}`);
+  }
+}
+
+(async function init(){
+  try { data = await loadRates(); }
+  catch { $('rate').textContent = 'Could not load rates. Check your connection.'; return; }
+
+  const codes = Object.keys(data.rates).sort();
+  const names = (() => { try { return new Intl.DisplayNames('en',{type:'currency'}); } catch { return null; } })();
+  const opts = codes.map(c => `<option value="${c}">${flag(c)} ${c}${names ? ' – ' + (names.of(c) || '') : ''}</option>`).join('');
+  const short = codes.map(c => `<option value="${c}">${flag(c)} ${c}</option>`).join('');
+  $('from').innerHTML = short; $('to').innerHTML = short; $('addsel').innerHTML = opts;
+
+  const saved = store.get('favs');
+  favs = (Array.isArray(saved) ? saved : DEFAULT_FAVS).filter(c => data.rates[c]);
+  const primary = favs[0] || 'USD';
+
+  const last = store.get('last') || {};
+  const m = location.hash.match(/^#([A-Z]{3})-([A-Z]{3})$/);
+  const P = window.PRESET;
+  $('from').value = P ? P.from : m && data.rates[m[1]] ? m[1] : (data.rates[last.from] ? last.from : primary);
+  $('to').value   = P ? P.to   : m && data.rates[m[2]] ? m[2] : (data.rates[last.to] ? last.to : (favs[1] || 'EUR'));
+  if (!P && last.amount) $('amount').value = last.amount;
+  $('addsel').value = codes.includes('JPY') ? 'JPY' : codes[0];
+
+  ['amount','from','to'].forEach(id => $(id).addEventListener('input', render));
+  $('quick').innerHTML = [10, 50, 100, 500, 1000].map(n => `<button data-amt="${n}">${n}</button>`).join('');
+  $('quick').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('amount').value = b.dataset.amt; render(); });
+  $('amount').addEventListener('focus', e => e.target.select());
+  $('result').addEventListener('focus', e => e.target.select());
+  // Editing the converted amount converts backwards into the source amount.
+  $('result').addEventListener('input', () => {
+    const v = parseFloat($('result').value) || 0;
+    $('amount').value = round(convert(v, $('to').value, $('from').value));
+    render();
+  });
+  $('swap').onclick = () => { $('swap').classList.toggle('spin'); const f=$('from').value; $('from').value=$('to').value; $('to').value=f; render(); };
+
+  const addFav = c => { if (!favs.includes(c)) { favs.push(c); saveFavs(); track('fav_add', { currency: c }); render(); } };
+  $('favto').onclick = () => addFav($('to').value);
+  $('addbtn').onclick = () => addFav($('addsel').value);
+
+  const fe = $('favs');
+  fe.addEventListener('input', e => {
+    const c = e.target.dataset.c; if (!c) return;
+    focusedFav = c;
+    if ($('to').value === c) $('to').value = $('from').value;
+    $('from').value = c;
+    $('amount').value = e.target.value;
+    render();
+  });
+  fe.addEventListener('focusout', () => { focusedFav = null; });
+  fe.addEventListener('click', e => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.rm) favs = favs.filter(c => c !== t.dataset.rm);
+    else if (t.dataset.primary) favs = [t.dataset.primary, ...favs.filter(c => c !== t.dataset.primary)];
+    else return;
+    saveFavs(); render();
+  });
+  render();
+  setupMonetization();
+})();
+
+// ---------- Monetization: AdMob banner, one-time "remove ads", share bonus ----------
+const CFG = window.APP_CONFIG;
+const cap = window.Capacitor;
+const native = !!(cap && cap.isNativePlatform && cap.isNativePlatform());
+const platform = native ? cap.getPlatform() : 'web';
+if (native) document.documentElement.classList.add('native');
+let AdMob, Purchases, Share, bannerOn = false, pkg = null, purchasesReady = false;
+
+const isPremium = () => !!store.get('premium');
+const bonusUntil = () => store.get('bonusUntil') || 0;
+const adFree = () => isPremium() || bonusUntil() > Date.now();
+
+async function showBanner(){
+  if (!AdMob || bannerOn) return;
+  try {
+    await AdMob.showBanner({
+      adId: platform === 'ios' ? CFG.admob.iosBanner : CFG.admob.androidBanner,
+      adSize: 'ADAPTIVE_BANNER', position: 'BOTTOM_CENTER', margin: 0, isTesting: CFG.admob.testMode
+    });
+    bannerOn = true;
+    document.documentElement.classList.add('hasbanner');
+  } catch (e) { console.warn('banner', e); }
+}
+async function hideBanner(){
+  document.documentElement.classList.remove('hasbanner');
+  if (!AdMob || !bannerOn) return;
+  try { await AdMob.removeBanner(); } catch {}
+  bannerOn = false;
+}
+
+function updateProUi(){
+  const free = adFree();
+  document.documentElement.classList.toggle('noads', free);
+  if (native) {
+    $('buy').style.display = $('restore').style.display = isPremium() ? 'none' : '';
+    $('buy').disabled = !pkg;
+    $('buy').textContent = pkg ? `Remove ads · ${pkg.product.priceString}` : 'Remove ads';
+    $('pro-title').textContent = isPremium() ? 'Ads removed. Thank you!' : 'Remove ads';
+    $('pro-sub').textContent = isPremium() ? 'Your purchase is active on this account.'
+      : (bonusUntil() > Date.now() ? 'Ad-free from sharing until ' + new Date(bonusUntil()).toLocaleString() + '. One-time purchase, no subscription.'
+      : 'One-time purchase, no subscription.');
+    if (!purchasesReady && !isPremium()) $('pro-sub').textContent += ' (Store not available right now.)';
+  }
+  free ? hideBanner() : showBanner();
+}
+
+function setPremium(v){ store.set('premium', !!v); updateProUi(); }
+
+function checkEntitlement(res){
+  const info = (res && res.customerInfo) || res;
+  const active = info && info.entitlements && info.entitlements.active;
+  return !!(active && active[CFG.revenuecat.entitlement]);
+}
+
+
+// ---------- Analytics (web only, cookieless providers; no amounts or personal data are sent) ----------
+let analyticsOn = false;
+function track(name, props){
+  if (!analyticsOn) return;
+  try {
+    const A = CFG.analytics;
+    if (A.provider === 'umami' && window.umami) window.umami.track(name, props || {});
+    else if (A.provider === 'plausible' && window.plausible) window.plausible(name, { props: props || {} });
+    else if (A.provider === 'goatcounter' && window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({ path: 'event/' + name + (props && props.pair ? '/' + props.pair : ''), title: name, event: true });
+    else if (A.provider === 'ga4' && window.gtag) window.gtag('event', name, props || {});
+  } catch {}
+}
+function loadScript(src, attrs){
+  const el = document.createElement('script'); el.src = src; el.defer = true;
+  Object.entries(attrs || {}).forEach(([k, v]) => el.setAttribute(k, v));
+  document.head.appendChild(el);
+}
+function initAnalytics(){
+  const A = CFG.analytics;
+  if (native || !A || A.provider === 'none') return;
+  if (navigator.doNotTrack === '1') return;
+  if (A.provider === 'umami' && A.umamiWebsiteId) loadScript(A.umamiScript, { 'data-website-id': A.umamiWebsiteId, 'data-domains': location.hostname });
+  else if (A.provider === 'plausible' && A.plausibleDomain) loadScript(A.plausibleScript, { 'data-domain': A.plausibleDomain });
+  else if (A.provider === 'goatcounter' && A.goatcounterCode) loadScript('https://gc.zgo.at/count.js', { 'data-goatcounter': `https://${A.goatcounterCode}.goatcounter.com/count` });
+  else if (A.provider === 'ga4' && A.ga4Id) {
+    // GA sets cookies, so it only runs after the visitor accepts the banner.
+    if (store.get('consent') !== true) return;
+    window.dataLayer = window.dataLayer || []; window.gtag = function(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date()); window.gtag('config', A.ga4Id);
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + A.ga4Id);
+  } else return;
+  analyticsOn = true;
+  setupSurvey();
+}
+
+let lastPair = '', pairTimer = null, pairCount = 0;
+function trackPair(from, to){
+  const pair = `${from}-${to}`;
+  if (pair === lastPair) return;
+  clearTimeout(pairTimer);
+  pairTimer = setTimeout(() => { lastPair = pair; pairCount++; track('convert', { pair }); maybeSurvey(); }, 1500);
+}
+
+function setupSurvey(){
+  $('survey-btns').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    track('use_case', { use: b.dataset.use }); store.set('surveyDone', true); $('survey').hidden = true;
+  });
+}
+function maybeSurvey(){
+  if (analyticsOn && pairCount >= 3 && !store.get('surveyDone')) $('survey').hidden = false;
+}
+
+function setupConsent(){
+  if (native || store.get('consent') !== null) { window.adsAllowed = store.get('consent') === true; return; }
+  const box = $('consent'); box.hidden = false;
+  const set = v => { store.set('consent', v); window.adsAllowed = v; box.hidden = true; };
+  $('consent-yes').onclick = () => set(true);
+  $('consent-no').onclick = () => set(false);
+  // When you add AdSense, load its script only if window.adsAllowed is true.
+}
+
+async function setupMonetization(){
+  setupConsent();
+  initAnalytics();
+  $('promo').addEventListener('click', () => track('affiliate_click', { pair: `${$('from').value}-${$('to').value}`, offer: CFG.offers.corridors[$('to').value] && CFG.offers.senders.includes($('from').value) ? 'route' : 'generic' }));
+  // Share works everywhere; bonus is for native apps (where ads cost the app money)
+  const bonusH = CFG.share.bonusHours;
+  $('share-sub').textContent = native
+    ? `Share the app and get ${bonusH} hours without ads (once a day, up to ${CFG.share.maxBonusDays} days saved).`
+    : 'Know someone who needs exchange rates? Send them the link.';
+  const link = shareUrl();
+  $('share-link').innerHTML = `<a href="${link}" target="_blank" rel="noopener">${link}</a>`;
+  $('share').onclick = shareApp;
+  $('copylink').onclick = async () => {
+    track('copy_link');
+    try { await navigator.clipboard.writeText(link); $('copylink').textContent = 'Copied!'; }
+    catch { prompt('Copy this link:', link); }
+    setTimeout(() => $('copylink').textContent = 'Copy link', 2000);
+  };
+
+  if (native) {
+    $('buy').onclick = buy;
+    $('restore').onclick = restore;
+    AdMob = cap.Plugins.AdMob || null;
+    Purchases = cap.Plugins.Purchases || null;
+    Share = cap.Plugins.Share || null;
+
+    // Purchases (RevenueCat)
+    const key = platform === 'ios' ? CFG.revenuecat.iosKey : CFG.revenuecat.androidKey;
+    if (key && Purchases) {
+      try {
+        await Purchases.configure({ apiKey: key });
+        purchasesReady = true;
+        setPremiumQuiet(checkEntitlement(await Purchases.getCustomerInfo()));
+        const off = await Purchases.getOfferings();
+        const cur = off && off.current;
+        pkg = cur && (cur.lifetime || (cur.availablePackages || [])[0]) || null;
+      } catch (e) { console.warn('purchases', e); }
+    }
+
+    // Ads (AdMob): consent first (EU), then tracking prompt (iOS), then init
+    if (AdMob) try {
+      try {
+        const ci = await AdMob.requestConsentInfo();
+        if (ci.isConsentFormAvailable && ci.status === 'REQUIRED') await AdMob.showConsentForm();
+      } catch (e) { console.warn('consent', e); }
+      if (platform === 'ios') { try { await AdMob.requestTrackingAuthorization(); } catch {} }
+      await AdMob.initialize({ initializeForTesting: CFG.admob.testMode });
+    } catch (e) { console.warn('admob', e); AdMob = null; }
+  }
+  updateProUi();
+  setInterval(updateProUi, 60000); // re-evaluate when a share bonus expires
+}
+
+function setPremiumQuiet(v){ if (v !== isPremium()) store.set('premium', v); }
+
+async function buy(){
+  if (!pkg) return;
+  try {
+    const res = await Purchases.purchasePackage({ aPackage: pkg });
+    if (checkEntitlement(res)) setPremium(true);
+  } catch (e) {
+    if (!(e && e.userCancelled)) alert('Purchase failed. You have not been charged.');
+  }
+}
+
+async function restore(){
+  try {
+    const res = await Purchases.restorePurchases();
+    if (checkEntitlement(res)) setPremium(true); else alert('No previous purchase found.');
+  } catch { alert('Could not restore purchases.'); }
+}
+
+// Native apps share the site link; web pages share the page you are on (e.g. a specific pair).
+function shareUrl(){ return native ? CFG.share.url : location.origin + location.pathname; }
+
+async function shareApp(){
+  track('share', { where: native ? 'app' : 'web' });
+  const { text } = CFG.share;
+  const url = shareUrl();
+  // Link goes inside the message text: many apps drop a separate "url" field.
+  const message = `${text} ${url}`;
+  let shared = false;
+  try {
+    if (native && Share) { await Share.share({ title: 'Currency Converter', text: message, dialogTitle: 'Share with friends' }); shared = true; }
+    else if (navigator.share) { await navigator.share({ title: 'Currency Converter', text: message }); shared = true; }
+    else { await navigator.clipboard.writeText(message); alert('Message with link copied!'); }
+  } catch { return; } // cancelled
+  if (shared && native) grantShareBonus();
+}
+
+function grantShareBonus(){
+  const today = new Date().toDateString();
+  if (store.get('lastShareDay') === today) return;
+  store.set('lastShareDay', today);
+  const cap_ = Date.now() + CFG.share.maxBonusDays * 864e5;
+  const base = Math.max(Date.now(), bonusUntil());
+  store.set('bonusUntil', Math.min(base + CFG.share.bonusHours * 36e5, cap_));
+  updateProUi();
+  alert(`Thanks for sharing! Ads are off for ${CFG.share.bonusHours} more hours.`);
+}
+</script>
+</body>
+</html>

@@ -4,11 +4,15 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE = (process.env.SITE_URL || 'https://example.com').replace(/\/$/, '');
-const CODES = ['USD','EUR','GBP','JPY','CAD','AUD','CHF','CNY','INR','MXN','BRL','KRW','SEK','NOK','NZD','SGD','HKD','TRY','ZAR','AED'];
+const CODES = ['USD','EUR','GBP','JPY','CAD','AUD','CHF','CNY','INR','MXN','BRL','KRW','SEK','NOK','NZD','SGD','HKD','TRY','ZAR','AED',
+  // remittance and travel corridors
+  'PHP','PLN','UAH','THB','VND','NGN','KES','EGP','PKR','BDT','IDR','MYR','COP','ARS','RON','CZK','HUF','ILS'];
+const OFFERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'offers.json'), 'utf8'));
 const AMOUNTS = [1, 5, 10, 50, 100, 500, 1000];
 const OUT = path.join(__dirname, 'dist');
 const CONFIG = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
 if (process.env.SITE_URL) CONFIG.share.url = SITE;
+CONFIG.offers = { defaultUrl: OFFERS.defaultUrl, urls: OFFERS.urls, generic: OFFERS.generic, corridors: OFFERS.corridors, senders: OFFERS.senders };
 // Only public client-side IDs belong in config.json (no secrets).
 const tpl = fs.readFileSync(path.join(__dirname, 'src/template.html'), 'utf8');
 const names = new Intl.DisplayNames('en', { type: 'currency' });
@@ -43,6 +47,7 @@ function write(rel, content) {
 (async () => {
   fs.rmSync(OUT, { recursive: true, force: true });
   const rates = await getRates();
+  if (rates) { const miss = CODES.filter(c => !rates[c]); if (miss.length) { console.warn('! Not in rates feed, skipped:', miss.join(' ')); for (const m of miss) CODES.splice(CODES.indexOf(m), 1); } }
   const urls = ['/'];
 
   // pair pages
@@ -73,7 +78,8 @@ function write(rel, content) {
     title: 'Currency Converter – Live Exchange Rates for 160+ Currencies',
     desc: 'Free currency converter with live exchange rates for 160+ currencies. Fast, simple, works offline.',
     h1: 'Currency Converter', canonical: SITE + '/', preset: null, root: '',
-    seo: `<div class="card"><h2>Popular conversions</h2><p class="sub links">${links}</p></div>`,
+    seo: `<div class="card"><h2>Popular conversions</h2><p class="sub links">${links}</p></div>`
+      + `<div class="card"><h2>Popular transfer routes</h2><p class="sub links">${OFFERS.featuredRoutes.filter(([a, b]) => CODES.includes(a) && CODES.includes(b)).map(([a, b]) => `<a href="convert/${slug(a, b)}/">${a} to ${b}</a>`).join('')}</p></div>`,
   }));
 
   // privacy policy (edit contact + ad provider details before applying to AdSense)

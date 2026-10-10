@@ -1,0 +1,139 @@
+{
+  "_note": "Replace the urls with your own affiliate/referral links. 'urls' can override the link per destination currency. Check each provider really supports the route before you promote it.",
+  "defaultUrl": "https://wise.com/",
+  "urls": {},
+  "generic": {
+    "title": "Sending money abroad?",
+    "text": "Banks often add a hidden markup to the exchange rate. Compare the real rate with a low-fee transfer service.",
+    "cta": "Compare transfer rates →"
+  },
+  "corridors": {
+    "PHP": "the Philippines",
+    "INR": "India",
+    "MXN": "Mexico",
+    "PLN": "Poland",
+    "UAH": "Ukraine",
+    "NGN": "Nigeria",
+    "KES": "Kenya",
+    "EGP": "Egypt",
+    "PKR": "Pakistan",
+    "BDT": "Bangladesh",
+    "VND": "Vietnam",
+    "THB": "Thailand",
+    "COP": "Colombia",
+    "BRL": "Brazil",
+    "CNY": "China",
+    "TRY": "Turkey",
+    "ZAR": "South Africa",
+    "RON": "Romania",
+    "IDR": "Indonesia",
+    "MYR": "Malaysia",
+    "ARS": "Argentina",
+    "CZK": "Czechia",
+    "HUF": "Hungary",
+    "ILS": "Israel",
+    "KRW": "South Korea",
+    "JPY": "Japan",
+    "AED": "the UAE",
+    "SGD": "Singapore",
+    "HKD": "Hong Kong",
+    "SEK": "Sweden",
+    "NOK": "Norway",
+    "NZD": "New Zealand",
+    "AUD": "Australia",
+    "CAD": "Canada",
+    "CHF": "Switzerland",
+    "GBP": "the UK",
+    "EUR": "Europe",
+    "USD": "the US"
+  },
+  "featuredRoutes": [
+    [
+      "USD",
+      "MXN"
+    ],
+    [
+      "USD",
+      "PHP"
+    ],
+    [
+      "USD",
+      "INR"
+    ],
+    [
+      "GBP",
+      "INR"
+    ],
+    [
+      "EUR",
+      "PLN"
+    ],
+    [
+      "EUR",
+      "UAH"
+    ],
+    [
+      "USD",
+      "NGN"
+    ],
+    [
+      "GBP",
+      "NGN"
+    ],
+    [
+      "USD",
+      "KES"
+    ],
+    [
+      "USD",
+      "PKR"
+    ],
+    [
+      "USD",
+      "BDT"
+    ],
+    [
+      "USD",
+      "VND"
+    ],
+    [
+      "USD",
+      "COP"
+    ],
+    [
+      "USD",
+      "BRL"
+    ],
+    [
+      "EUR",
+      "TRY"
+    ],
+    [
+      "AUD",
+      "INR"
+    ],
+    [
+      "CAD",
+      "INR"
+    ],
+    [
+      "USD",
+      "EGP"
+    ]
+  ],
+  "senders": [
+    "USD",
+    "EUR",
+    "GBP",
+    "CAD",
+    "AUD",
+    "AED",
+    "SGD",
+    "CHF",
+    "NZD",
+    "SEK",
+    "NOK",
+    "JPY",
+    "HKD"
+  ]
+}

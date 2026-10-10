@@ -88,6 +88,7 @@ tr:last-child td{border-bottom:0}
 .ad{min-height:90px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;border:1px dashed var(--border);border-radius:16px;margin-bottom:14px}
 .promo{display:block;text-decoration:none;color:inherit;font-size:.92rem;line-height:1.45}
 .promo b{color:var(--accent);font-size:1rem}
+.promo-cta{margin-top:8px;font-weight:700;color:var(--accent)}
 #promo-card{background:linear-gradient(135deg,rgba(47,91,234,.08),rgba(109,74,255,.08))}
 .cardhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
 .cardhead span{font-size:.75rem;color:var(--muted)}
@@ -169,8 +170,9 @@ footer p{margin:4px 0}
     <!-- MONETIZATION 1: affiliate offer. Replace href with your own referral link (Wise, Revolut, Remitly, etc.) -->
     <div class="card o3" id="promo-card">
       <a class="promo" id="promo" href="https://wise.com/" target="_blank" rel="sponsored noopener">
-        <b>Sending money abroad?</b><br>
-        Banks add hidden markups to the exchange rate. Compare the real rate with a low-fee transfer service →
+        <b id="promo-title">Sending money abroad?</b><br>
+        <span id="promo-text">Banks often add a hidden markup to the exchange rate. Compare the real rate with a low-fee transfer service.</span>
+        <div class="promo-cta" id="promo-cta">Compare transfer rates →</div>
         <div class="sub">Sponsored link</div>
       </a>
     </div>
@@ -281,6 +283,17 @@ function updateSeo(from, to){
   $('seo-p').innerHTML = `The ${from} to ${to} exchange rate is about <b>${r.toFixed(4)}</b> (1 ${from} = ${r.toFixed(4)} ${to}). Use the converter above for the live rate.`;
   t.innerHTML = AMOUNTS.map(x => `<tr><td>${fmt(x, from)}</td><td>${fmt(x * r, to)}</td></tr>`).join('');
 }
+function updatePromo(from, to){
+  const o = CFG.offers, c = o.corridors[to], g = o.generic;
+  if (c && to !== from && o.senders.includes(from)) {
+    $('promo-title').textContent = `Sending ${from} to ${c}?`;
+    $('promo-text').textContent = `Banks often add a hidden markup to the ${from} to ${to} rate. Compare transfer services to see how much more arrives in ${to}.`;
+    $('promo-cta').textContent = `Compare ${from} to ${to} transfer rates →`;
+  } else {
+    $('promo-title').textContent = g.title; $('promo-text').textContent = g.text; $('promo-cta').textContent = g.cta;
+  }
+  $('promo').href = o.urls[to] || o.defaultUrl;
+}
 function round(n){ return n >= 100 ? Math.round(n*100)/100 : Math.round(n*10000)/10000; }
 
 function render(){
@@ -294,6 +307,7 @@ function render(){
   $('favto').disabled = favs.includes(to);
   renderFavs(from, amount);
   updateSeo(from, to);
+  updatePromo(from, to);
   if (!window.PRESET) {
     store.set('last', { from, to, amount });
     history.replaceState(null, '', `#${from}-${to}`);

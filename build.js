@@ -87,9 +87,10 @@ function write(rel, content) {
   write('manifest.webmanifest', JSON.stringify({
     name: 'Currency Converter', short_name: 'Converter', start_url: './', display: 'standalone',
     background_color: '#f5f7fb', theme_color: '#2563eb',
-    icons: [{ src: 'icon.svg', sizes: 'any', type: 'image/svg+xml' }],
+    icons: [{ src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: 'icon.svg', sizes: 'any', type: 'image/svg+xml' }],
   }));
-  write('icon.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#2563eb"/><text x="50" y="68" font-size="56" text-anchor="middle">💱</text></svg>');
+  write('icon.svg', fs.readFileSync(path.join(__dirname, 'assets/icon.svg'), 'utf8'));
+  write('icon-512.png', fs.readFileSync(path.join(__dirname, 'store/icon-512.png')));
   write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
     + urls.map(u => `<url><loc>${SITE}${u}</loc></url>`).join('\n') + `\n</urlset>\n`);

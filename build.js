@@ -50,16 +50,16 @@ function write(rel, content) {
     if (a === b) continue;
     const url = `/convert/${slug(a, b)}/`;
     urls.push(url);
-    let seo = `<div class="card"><h2>Convert ${name(a)} to ${name(b)}</h2>`;
+    let seo = `<div class="card"><h2 id="seo-h">Convert ${name(a)} to ${name(b)}</h2>`;
     if (rates) {
       const r = rates[b] / rates[a];
-      seo += `<p>The ${a} to ${b} exchange rate is about <b>${r.toFixed(4)}</b> (1 ${a} = ${r.toFixed(4)} ${b}). `
-           + `Use the converter above for the live rate.</p><table>`
+      seo += `<p id="seo-p">The ${a} to ${b} exchange rate is about <b>${r.toFixed(4)}</b> (1 ${a} = ${r.toFixed(4)} ${b}). `
+           + `Use the converter above for the live rate.</p><table id="seo-table">`
            + AMOUNTS.map(x => `<tr><td>${fmt(x, a)}</td><td>${fmt(x * r, b)}</td></tr>`).join('') + `</table>`;
-    } else seo += `<p>Use the converter above to convert ${a} to ${b} at the latest exchange rate.</p>`;
+    } else seo += `<p id="seo-p">Use the converter above to convert ${a} to ${b} at the latest exchange rate.</p>`;
     const others = CODES.filter(c => c !== a && c !== b).slice(0, 6)
-      .map(c => `<a href="../${slug(a, c)}/">${a} to ${c}</a>`).join(' · ');
-    seo += `<p class="sub">More: ${others}</p></div>`;
+      .map(c => `<a href="../${slug(a, c)}/">${a} to ${c}</a>`).join('');
+    seo += `<p class="sub links">More: ${others}</p></div>`;
     write(`convert/${slug(a, b)}/index.html`, page({
       title: `${a} to ${b} – Convert ${name(a)} to ${name(b)} | Live Rate`,
       desc: `Convert ${a} to ${b} with the live exchange rate. Free ${name(a)} to ${name(b)} converter with a quick amount table.`,
@@ -68,12 +68,12 @@ function write(rel, content) {
   }
 
   // home with links to popular pairs
-  const links = CODES.slice(0, 8).flatMap(a => CODES.slice(0, 8).filter(b => b !== a).map(b => `<a href="convert/${slug(a, b)}/">${a} to ${b}</a>`)).join(' · ');
+  const links = CODES.slice(0, 8).flatMap(a => CODES.slice(0, 8).filter(b => b !== a).map(b => `<a href="convert/${slug(a, b)}/">${a} to ${b}</a>`)).join('');
   write('index.html', page({
     title: 'Currency Converter – Live Exchange Rates for 160+ Currencies',
     desc: 'Free currency converter with live exchange rates for 160+ currencies. Fast, simple, works offline.',
     h1: 'Currency Converter', canonical: SITE + '/', preset: null, root: '',
-    seo: `<div class="card"><h2>Popular conversions</h2><p class="sub" style="line-height:2">${links}</p></div>`,
+    seo: `<div class="card"><h2>Popular conversions</h2><p class="sub links">${links}</p></div>`,
   }));
 
   // privacy policy (edit contact + ad provider details before applying to AdSense)

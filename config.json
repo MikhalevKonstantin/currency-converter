@@ -16,5 +16,15 @@
     "text": "Check out this currency converter: live rates for 160+ currencies.",
     "bonusHours": 24,
     "maxBonusDays": 7
+  },
+  "analytics": {
+    "_note": "provider: none | umami | plausible | goatcounter | ga4. Fill only the field for the provider you pick. Web only; apps never load analytics.",
+    "provider": "none",
+    "umamiWebsiteId": "",
+    "umamiScript": "https://cloud.umami.is/script.js",
+    "plausibleDomain": "",
+    "plausibleScript": "https://plausible.io/js/script.tagged-events.js",
+    "goatcounterCode": "",
+    "ga4Id": ""
   }
 }

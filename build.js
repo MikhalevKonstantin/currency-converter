@@ -82,13 +82,26 @@ function write(rel, content) {
       + `<div class="card"><h2>Popular transfer routes</h2><p class="sub links">${OFFERS.featuredRoutes.filter(([a, b]) => CODES.includes(a) && CODES.includes(b)).map(([a, b]) => `<a href="convert/${slug(a, b)}/">${a} to ${b}</a>`).join('')}</p></div>`,
   }));
 
-  // privacy policy (edit contact + ad provider details before applying to AdSense)
+  // privacy policy (set contactEmail in config.json before applying to AdSense or the stores)
+  const email = CONFIG.contactEmail || 'your-email@example.com';
+  const prov = CONFIG.analytics.provider;
   write('privacy.html', `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy Policy</title>
-<body style="font-family:system-ui;max-width:640px;margin:24px auto;padding:0 16px;line-height:1.6">
+<body style="font-family:system-ui;max-width:680px;margin:24px auto;padding:0 16px;line-height:1.6">
 <h1>Privacy Policy</h1>
-<p>This app converts currencies using public exchange rate data. It does not require an account and stores only your last selected currencies and cached rates in your browser.</p>
-<p>Third-party advertising partners (such as Google AdSense) may use cookies to show ads. You can opt out of personalized advertising in your Google ad settings. Some links on this site are affiliate links: we may earn a commission at no extra cost to you.</p>
-<p>Rates are for information only and are not financial advice. Contact: <i>your-email@example.com</i></p></body>`);
+<p>Currency Converter converts currencies using public exchange rate data. It has no accounts. Your favourite currencies, last amounts and settings are stored only on your device.</p>
+<h2>Analytics (website)</h2>
+<p>${prov === 'none' ? 'The website does not currently use analytics.' : 'The website measures visits and which currency pairs are used with a privacy-friendly analytics service' + (prov === 'ga4' ? ' (Google Analytics, only if you accept cookies)' : ' that does not use cookies') + '. We do not record the amounts you type, and the service does not track you across other sites. We respect your browser\'s Do Not Track setting.'}</p>
+<h2>Advertising</h2>
+<p>The apps and, in future, the website may show ads from Google AdMob / AdSense. These services can use your device advertising ID and cookies to show and measure ads. You can choose not to see personalised ads in the consent prompt, in your device settings, or in your Google ad settings. In the apps on iOS you decide in the App Tracking Transparency prompt.</p>
+<h2>Purchases (apps)</h2>
+<p>The one-time "remove ads" purchase is processed by Apple or Google. We use RevenueCat to confirm the purchase; it receives an anonymous app user ID and your purchase status, not your name or payment details.</p>
+<h2>Affiliate links</h2>
+<p>Some links, such as money transfer offers, are affiliate links. We may earn a commission if you sign up, at no extra cost to you. They are labelled "Sponsored link".</p>
+<h2>Children</h2>
+<p>The app is not directed at children under 13.</p>
+<h2>Contact</h2>
+<p>Questions or requests: <a href="mailto:${email}">${email}</a></p>
+<p><small>Exchange rates are for information only and are not financial advice. Last updated: ${new Date().toISOString().slice(0, 10)}.</small></p></body>`);
 
   write('manifest.webmanifest', JSON.stringify({
     name: 'Currency Converter', short_name: 'Converter', start_url: './', display: 'standalone',

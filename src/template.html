@@ -177,6 +177,18 @@ footer p{margin:4px 0}
       </a>
     </div>
 
+    <div class="card o3" id="survey" hidden>
+      <b class="title">Quick question</b>
+      <div class="sub">What do you mostly use this for? (anonymous, helps us improve)</div>
+      <div class="btns" id="survey-btns">
+        <button class="ghost" data-use="travel">Travel</button>
+        <button class="ghost" data-use="shopping">Shopping</button>
+        <button class="ghost" data-use="sending-money">Sending money</button>
+        <button class="ghost" data-use="work">Work</button>
+        <button class="ghost" data-use="other">Other</button>
+      </div>
+    </div>
+
     <div class="card o4" id="share-card">
       <b class="title">Share with friends</b>
       <div class="sub" id="share-sub"></div>
@@ -308,6 +320,7 @@ function render(){
   renderFavs(from, amount);
   updateSeo(from, to);
   updatePromo(from, to);
+  trackPair(from, to);
   if (!window.PRESET) {
     store.set('last', { from, to, amount });
     history.replaceState(null, '', `#${from}-${to}`);
@@ -349,8 +362,9 @@ function render(){
   });
   $('swap').onclick = () => { $('swap').classList.toggle('spin'); const f=$('from').value; $('from').value=$('to').value; $('to').value=f; render(); };
 
-  $('favto').onclick = () => { const c=$('to').value; if (!favs.includes(c)) { favs.push(c); saveFavs(); render(); } };
-  $('addbtn').onclick = () => { const c=$('addsel').value; if (!favs.includes(c)) { favs.push(c); saveFavs(); render(); } };
+  const addFav = c => { if (!favs.includes(c)) { favs.push(c); saveFavs(); track('fav_add', { currency: c }); render(); } };
+  $('favto').onclick = () => addFav($('to').value);
+  $('addbtn').onclick = () => addFav($('addsel').value);
 
   const fe = $('favs');
   fe.addEventListener('input', e => {
@@ -427,6 +441,61 @@ function checkEntitlement(res){
   return !!(active && active[CFG.revenuecat.entitlement]);
 }
 
+
+// ---------- Analytics (web only, cookieless providers; no amounts or personal data are sent) ----------
+let analyticsOn = false;
+function track(name, props){
+  if (!analyticsOn) return;
+  try {
+    const A = CFG.analytics;
+    if (A.provider === 'umami' && window.umami) window.umami.track(name, props || {});
+    else if (A.provider === 'plausible' && window.plausible) window.plausible(name, { props: props || {} });
+    else if (A.provider === 'goatcounter' && window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({ path: 'event/' + name + (props && props.pair ? '/' + props.pair : ''), title: name, event: true });
+    else if (A.provider === 'ga4' && window.gtag) window.gtag('event', name, props || {});
+  } catch {}
+}
+function loadScript(src, attrs){
+  const el = document.createElement('script'); el.src = src; el.defer = true;
+  Object.entries(attrs || {}).forEach(([k, v]) => el.setAttribute(k, v));
+  document.head.appendChild(el);
+}
+function initAnalytics(){
+  const A = CFG.analytics;
+  if (native || !A || A.provider === 'none') return;
+  if (navigator.doNotTrack === '1') return;
+  if (A.provider === 'umami' && A.umamiWebsiteId) loadScript(A.umamiScript, { 'data-website-id': A.umamiWebsiteId, 'data-domains': location.hostname });
+  else if (A.provider === 'plausible' && A.plausibleDomain) loadScript(A.plausibleScript, { 'data-domain': A.plausibleDomain });
+  else if (A.provider === 'goatcounter' && A.goatcounterCode) loadScript('https://gc.zgo.at/count.js', { 'data-goatcounter': `https://${A.goatcounterCode}.goatcounter.com/count` });
+  else if (A.provider === 'ga4' && A.ga4Id) {
+    // GA sets cookies, so it only runs after the visitor accepts the banner.
+    if (store.get('consent') !== true) return;
+    window.dataLayer = window.dataLayer || []; window.gtag = function(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date()); window.gtag('config', A.ga4Id);
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + A.ga4Id);
+  } else return;
+  analyticsOn = true;
+  setupSurvey();
+}
+
+let lastPair = '', pairTimer = null, pairCount = 0;
+function trackPair(from, to){
+  const pair = `${from}-${to}`;
+  if (pair === lastPair) return;
+  clearTimeout(pairTimer);
+  pairTimer = setTimeout(() => { lastPair = pair; pairCount++; track('convert', { pair }); maybeSurvey(); }, 1500);
+}
+
+function setupSurvey(){
+  $('survey-btns').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    track('use_case', { use: b.dataset.use }); store.set('surveyDone', true); $('survey').hidden = true;
+  });
+}
+function maybeSurvey(){
+  if (analyticsOn && pairCount >= 3 && !store.get('surveyDone')) $('survey').hidden = false;
+}
+
 function setupConsent(){
   if (native || store.get('consent') !== null) { window.adsAllowed = store.get('consent') === true; return; }
   const box = $('consent'); box.hidden = false;
@@ -438,6 +507,8 @@ function setupConsent(){
 
 async function setupMonetization(){
   setupConsent();
+  initAnalytics();
+  $('promo').addEventListener('click', () => track('affiliate_click', { pair: `${$('from').value}-${$('to').value}`, offer: CFG.offers.corridors[$('to').value] && CFG.offers.senders.includes($('from').value) ? 'route' : 'generic' }));
   // Share works everywhere; bonus is for native apps (where ads cost the app money)
   const bonusH = CFG.share.bonusHours;
   $('share-sub').textContent = native
@@ -447,6 +518,7 @@ async function setupMonetization(){
   $('share-link').innerHTML = `<a href="${link}" target="_blank" rel="noopener">${link}</a>`;
   $('share').onclick = shareApp;
   $('copylink').onclick = async () => {
+    track('copy_link');
     try { await navigator.clipboard.writeText(link); $('copylink').textContent = 'Copied!'; }
     catch { prompt('Copy this link:', link); }
     setTimeout(() => $('copylink').textContent = 'Copy link', 2000);
@@ -509,6 +581,7 @@ async function restore(){
 function shareUrl(){ return native ? CFG.share.url : location.origin + location.pathname; }
 
 async function shareApp(){
+  track('share', { where: native ? 'app' : 'web' });
   const { text } = CFG.share;
   const url = shareUrl();
   // Link goes inside the message text: many apps drop a separate "url" field.

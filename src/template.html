@@ -476,11 +476,13 @@ function shareUrl(){ return native ? CFG.share.url : location.origin + location.
 async function shareApp(){
   const { text } = CFG.share;
   const url = shareUrl();
+  // Link goes inside the message text: many apps drop a separate "url" field.
+  const message = `${text} ${url}`;
   let shared = false;
   try {
-    if (native && Share) { await Share.share({ title: 'Currency Converter', text, url, dialogTitle: 'Share with friends' }); shared = true; }
-    else if (navigator.share) { await navigator.share({ title: 'Currency Converter', text, url }); shared = true; }
-    else { await navigator.clipboard.writeText(url); alert('Link copied!'); }
+    if (native && Share) { await Share.share({ title: 'Currency Converter', text: message, dialogTitle: 'Share with friends' }); shared = true; }
+    else if (navigator.share) { await navigator.share({ title: 'Currency Converter', text: message }); shared = true; }
+    else { await navigator.clipboard.writeText(message); alert('Message with link copied!'); }
   } catch { return; } // cancelled
   if (shared && native) grantShareBonus();
 }
